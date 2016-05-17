@@ -46,11 +46,8 @@
 
 	'use strict';
 
-	var sayHello = function sayHello() {
-	  return console.log('Hello');
-	};
-
-	sayHello();
+	var canvas = document.getElementById('game');
+	var context = canvas.getContext('2d');
 
 /***/ }
 /******/ ]);

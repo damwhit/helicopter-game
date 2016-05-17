@@ -1,7 +1,7 @@
 {
-  "name": "game-time-starter-kit",
+  "name": "helicopter-time",
   "version": "1.0.0",
-  "description": "A starter kit for Turing School's Game Time project.",
+  "description": "Traverse the obstacles and boundaries with your copter.",
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/turingschool-examples/game-time-starter-kit.git"
+    "url": "https://github.com/damwhit/helicopter-game.git"
   },
-  "author": "Steve Kinney",
+  "author": "Brian Rippeto & David Whitaker",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/turingschool-examples/game-time-starter-kit/issues"
+    "url": "https://github.com/damwhit/helicopter-game/issues"
   },
-  "homepage": "https://github.com/turingschool-examples/game-time-starter-kit",
+  "homepage": "https://github.com/damwhit/helicopter-game",
   "devDependencies": {
     "babel": "^5.8.3",
     "babel-core": "^5.7.4",
