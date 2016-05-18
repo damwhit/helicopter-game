@@ -3,3 +3,12 @@
   margin: auto;
   display: block;
 }
+
+#start-game {
+  padding-left: 700px;
+  padding-top: 200px;
+}
+
+.copter-game{
+  display: block;
+}
