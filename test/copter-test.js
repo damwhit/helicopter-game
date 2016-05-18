@@ -23,11 +23,20 @@ describe('Copter', function() {
   });
 
   describe('#gravity', function() {
-    it('should move y coordinate by 2', function(){
+    it('should move y coordinate by 4', function(){
       var ycoord = 1;
       var copter = new Copter(0, ycoord, 10, 10);
       copter.gravity();
-      expect.equal(copter.y, 3);
+      expect.equal(copter.y, 5);
+    });
+  });
+
+  describe('#upLift', function() {
+    it('should move y coordinate by 21', function(){
+      var ycoord = 1;
+      var copter = new Copter(0, ycoord, 10, 10);
+      copter.upLift();
+      expect.equal(copter.y, -20);
     });
   });
 });
