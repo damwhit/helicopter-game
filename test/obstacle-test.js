@@ -35,12 +35,10 @@ describe('Obstacle', function() {
     it('should assign random height between 90 and 120 and y between 20 and 450', function(){
       var obstacle = new Obstacle(0, 20, 10, 10);
       obstacle.shuffleObstacle();
-      for ( var i = 0; i < 10; i++) {
-        expect.isAbove(obstacle.height, 90);
-        expect.isBelow(obstacle.height, 120);
-        expect.isAbove(obstacle.y, 20);
-        expect.isBelow(obstacle.y, 450);
-      }
+        expect.isAbove(obstacle.height, 89);
+        expect.isBelow(obstacle.height, 121);
+        expect.isAbove(obstacle.y, 19);
+        expect.isBelow(obstacle.y, 451);
     });
   });
 });
