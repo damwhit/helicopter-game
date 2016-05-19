@@ -32,13 +32,15 @@ describe('Boundary', function() {
   });
 
   describe('#shuffleBoundary', function() {
-    it('should assign random height between 0 and 100', function(){
-      var boundary = new Boundary(0, 20, 10, 10);
-      boundary.shuffleBoundary();
-      for ( var i = 0; i < 10; i++) {
-        expect.isAbove(boundary.height, 19);
-        expect.isBelow(boundary.height, 101);
-      }
+    it('should assign random height between 20 and 100 and y between 500 and 580', function(){
+      var boundary1 = new Boundary(0, 20, 10, 10);
+      var boundary2 = new Boundary(0, 310, 10, 10);
+      boundary1.shuffleBoundary();
+        expect.isAbove(boundary1.height, 19);
+        expect.isBelow(boundary1.height, 101);
+      boundary2.shuffleBoundary();
+        expect.isAbove(boundary2.y, 499);
+        expect.isBelow(boundary2.y, 581);
     });
   });
 });
