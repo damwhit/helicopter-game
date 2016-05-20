@@ -1,14 +1,36 @@
+/*body {
+  text-align: center;
+}*/
+
+
 .game-canvas {
   border: 1px dashed;
   margin: auto;
   display: block;
+  text-align: center;
 }
 
 #start-game, #end-game {
-  padding-left: 700px;
-  padding-top: 200px;
+  text-align: center;
+}
+
+.score-count {
+  text-align: center;
+  position: relative
+    margin: 40px 0;
+    font-size: 40px;
+    line-height: 40px;
+    font-weight: 600;
+  }
+.scoreboard {
+  padding-left: 70px;
+  float: left;
+}
+
+#scoreboard-table {
+  font-size: 24px;
 }
 
 .copter-game{
-  display: block;
+  padding-top: 50px;
 }
