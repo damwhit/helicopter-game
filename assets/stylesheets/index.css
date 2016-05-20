@@ -2,29 +2,50 @@
   border: 1px dashed;
   margin: auto;
   display: block;
+  text-align: center;
+}
+
+#start-game, #end-game {
+  text-align: center;
+}
+
+.score-count {
+  text-align: center;
+  position: relative
+    margin: 40px 0;
+    font-size: 40px;
+    line-height: 40px;
+    font-weight: 600;
+  }
+
+.scoreboard {
+  padding-left: 70px;
+  float: left;
+}
+
+#scoreboard-table {
+  font-size: 24px;
 }
 
 .copter-game{
-  display: block;
+  padding-top: 50px;
 }
 
 button {
-	background-color: deepPink;
+	background-color: firebrick;
 	color: white;
-	box-shadow: 1px 0px 1px #BE3077,
-				0px 1px 1px hotpink,
-				2px 1px 1px #BE3077,
-				1px 2px 1px hotpink,
-				3px 2px 1px #BE3077,
-				2px 3px 1px hotpink,
-				4px 3px 1px #BE3077,
-				3px 4px 1px hotpink,
-				5px 4px 1px #BE3077,
-				4px 5px 1px hotpink,
-				6px 5px 1px #BE3077;
+	box-shadow: 1px 0px 1px #DC143C,
+				0px 1px 1px red,
+				2px 1px 1px #DC143C,
+				1px 2px 1px red,
+				3px 2px 1px #DC143C,
+				2px 3px 1px red,
+				4px 3px 1px #DC143C,
+				3px 4px 1px red,
+				5px 4px 1px #DC143C,
+				4px 5px 1px red,
+				6px 5px 1px #DC143C;
 	cursor: pointer;
-  margin-left: 500px;
-  margin-top: 200px;
 	border: 0px;
 	font-size: 45px;
 	font-weight: normal;

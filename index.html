@@ -9,9 +9,23 @@
   <div class="copter-game">
     <button class="button" id="start-button">start game</button>
     <button class="end-game button">Game OVER... try again?</button>
-    <canvas id="game" class="game-canvas" width="800px" height="600px"></canvas>
     <img id="copter-pic" src="assets/images/copter.jpg">
     <img id="cloud-pic" src="assets/images/cloud.jpg">
+    <div class="score-count"></div>
+    <div class="scoreboard">
+      <h1>Top Scores</h1>
+      <table id='scoreboard-table'>
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id='score'>
+        </tbody>
+      </table>
+    </div>
+    <canvas id="game" class="game-canvas" width="800px" height="600px"></canvas>
   </div>
   <script src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
   <script src="main.bundle.js"></script>
