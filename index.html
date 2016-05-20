@@ -7,8 +7,10 @@
 </head>
 <body>
   <div class="copter-game">
-    <h2 id="start-game">Click to begin - Use space bar to fly</h2>
-    <h2 id="end-game">Game OVER! Click to try again</h2>
+    <button class="button" id="start-button">start game</button>
+    <button class="end-game button">Game OVER... try again?</button>
+    <img id="copter-pic" src="assets/images/copter.jpg">
+    <img id="cloud-pic" src="assets/images/cloud.jpg">
     <div class="score-count"></div>
     <div class="scoreboard">
       <h1>Top Scores</h1>
@@ -24,7 +26,6 @@
       </table>
     </div>
     <canvas id="game" class="game-canvas" width="800px" height="600px"></canvas>
-
   </div>
   <script src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
   <script src="main.bundle.js"></script>
