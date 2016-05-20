@@ -3,7 +3,12 @@ const Copter = require('../lib/copter');
 
 describe('Copter', function() {
   context('with default attributes', function() {
-    var copter = new Copter(0, 0, 10, 10);
+    var img = 'img';
+    var copter = new Copter(img, 0, 0, 10, 10);
+
+    it('should assign an x coordinate', function() {
+      expect.equal(copter.image, 'img');
+    });
 
     it('should assign an x coordinate', function() {
       expect.equal(copter.x, 0);
@@ -24,8 +29,9 @@ describe('Copter', function() {
 
   describe('#gravity', function() {
     it('should move y coordinate by 4', function(){
+      var img = 'img';
       var ycoord = 1;
-      var copter = new Copter(0, ycoord, 10, 10);
+      var copter = new Copter(img, 0, ycoord, 10, 10);
       copter.gravity();
       expect.equal(copter.y, 5);
     });
@@ -33,8 +39,9 @@ describe('Copter', function() {
 
   describe('#upLift', function() {
     it('should move y coordinate by 21', function(){
+      var img = 'img';
       var ycoord = 1;
-      var copter = new Copter(0, ycoord, 10, 10);
+      var copter = new Copter(img, 0, ycoord, 10, 10);
       copter.upLift();
       expect.equal(copter.y, -20);
     });
