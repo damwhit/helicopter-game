@@ -1,9 +1,15 @@
 const expect = require('chai').assert;
 const Copter = require('../lib/copter');
+const Boundary = require('../lib/boundary');
 
 describe('Copter', function() {
   context('with default attributes', function() {
-    var copter = new Copter(0, 0, 10, 10);
+    var img = 'img';
+    var copter = new Copter(img, 0, 0, 10, 10);
+
+    it('should assign an x coordinate', function() {
+      expect.equal(copter.image, 'img');
+    });
 
     it('should assign an x coordinate', function() {
       expect.equal(copter.x, 0);
@@ -24,8 +30,9 @@ describe('Copter', function() {
 
   describe('#gravity', function() {
     it('should move y coordinate by 4', function(){
+      var img = 'img';
       var ycoord = 1;
-      var copter = new Copter(0, ycoord, 10, 10);
+      var copter = new Copter(img, 0, ycoord, 10, 10);
       copter.gravity();
       expect.equal(copter.y, 5);
     });
@@ -33,10 +40,22 @@ describe('Copter', function() {
 
   describe('#upLift', function() {
     it('should move y coordinate by 21', function(){
+      var img = 'img';
       var ycoord = 1;
-      var copter = new Copter(0, ycoord, 10, 10);
+      var copter = new Copter(img, 0, ycoord, 10, 10);
       copter.upLift();
       expect.equal(copter.y, -20);
+    });
+  });
+
+  describe('#checkForCollision', function() {
+    it('should change copter status to crashed on collision', function(){
+      var copter = new Copter({}, 0, 198, 10, 10);
+      var boundary = new Boundary(0, 200, 50, 800, 0, { status: "active" }, 0);
+      expect.equal(copter.status, 'flying');
+      copter.gravity();
+      copter.checkForCollision(boundary, 12);
+      expect.equal(copter.status, "crashed");
     });
   });
 });
