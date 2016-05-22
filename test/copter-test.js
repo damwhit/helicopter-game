@@ -49,16 +49,13 @@ describe('Copter', function() {
   });
 
   describe('#checkForCollision', function() {
-    it('should change game status to inactive on collision', function(){
+    it('should change copter status to crashed on collision', function(){
       var copter = new Copter({}, 0, 198, 10, 10);
       var boundary = new Boundary(0, 200, 50, 800, 0, { status: "active" }, 0);
-
-      copter.checkForCollision(boundary, 12);
-      expect.equal(boundary.game.status,  'active');
+      expect.equal(copter.status, 'flying');
       copter.gravity();
-
       copter.checkForCollision(boundary, 12);
-      expect.equal(boundary.game.status, "inactive");
+      expect.equal(copter.status, "crashed");
     });
   });
 });
