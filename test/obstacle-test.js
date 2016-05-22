@@ -32,11 +32,11 @@ describe('Obstacle', function() {
   });
 
   describe('#shuffleObstacle', function() {
-    it('should assign random height between 90 and 120 and y between 80 and 450', function(){
+    it('should assign random height between 70 and 120 and y between 80 and 450', function(){
       var obstacle = new Obstacle(0, 20, 10, 10);
       obstacle.shuffleObstacle();
-        expect.isAbove(obstacle.height, 89);
-        expect.isBelow(obstacle.height, 121);
+        expect.isAbove(obstacle.height, 69);
+        expect.isBelow(obstacle.height, 450);
         expect.isAbove(obstacle.y, 79);
         expect.isBelow(obstacle.y, 451);
     });
