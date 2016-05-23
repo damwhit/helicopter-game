@@ -36,7 +36,7 @@ describe('Boundary', function() {
       var boundary1 = new Boundary(0, 20, 10, 10);
       var boundary2 = new Boundary(0, 310, 10, 10);
       boundary1.shuffleBoundary();
-        expect.isAbove(boundary1.y, -151);
+        expect.isAbove(boundary1.y, -176);
         expect.isBelow(boundary1.y, -49);
       boundary2.shuffleBoundary();
         expect.isAbove(boundary2.y, 509);
