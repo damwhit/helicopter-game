@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/damwhit/helicopter-time.png?label=ready&title=Ready)](https://waffle.io/damwhit/helicopter-time)
 # Game Time Starter Kit
 
 To install the dependencies:
