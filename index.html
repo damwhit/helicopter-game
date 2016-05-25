@@ -9,8 +9,6 @@
 <body>
   <div class="copter-game">
     <div class="score-count"></div>
-    <button class="button" id="start-button">start game</button>
-    <button class="end-game button">Game OVER... try again?</button>
     <img id="copter-pic" src="assets/images/attack-copter.png">
     <img id="cloud-pic" src="assets/images/cloud-black.png">
     <img id="building-pic" src="assets/images/building.jpg">
@@ -31,6 +29,12 @@
         </tbody>
       </table>
     </div>
+    <div class="info">
+      <h1 id="game-title">Helicopter Time</h1>
+      <h3 id="game-info">Use 'spacebar' to fly and avoid obstacles</h3>
+    </div>
+    <button class="button" id="start-button">start game</button>
+    <button class="end-game button">Game OVER... try again?</button>
     <canvas id="game" class="game-canvas" width="800px" height="600px"></canvas>
   </div>
   <script src="main.bundle.js"></script>
