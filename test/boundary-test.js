@@ -1,4 +1,4 @@
-const expect = require('chai').assert;
+const assert = require('chai').assert;
 const Boundary = require('../lib/boundary');
 
 describe('Boundary', function() {
@@ -6,19 +6,19 @@ describe('Boundary', function() {
     var boundary = new Boundary(0, 0, 10, 10);
 
     it('should assign an x coordinate', function() {
-      expect.equal(boundary.x, 0);
+      assert.equal(boundary.x, 0);
     });
 
     it('should assign a y coordinate', function() {
-      expect.equal(boundary.y, 0);
+      assert.equal(boundary.y, 0);
     });
 
     it('should assign a height', function(){
-      expect.equal(boundary.height, 10);
+      assert.equal(boundary.height, 10);
     });
 
     it('should assign a width', function(){
-      expect.equal(boundary.width, 10);
+      assert.equal(boundary.width, 10);
     });
   });
 
@@ -27,7 +27,7 @@ describe('Boundary', function() {
       var xcoord = 10;
       var boundary = new Boundary(xcoord, 0, 10, 10);
       boundary.move();
-      expect.equal(boundary.x, 5);
+      assert.equal(boundary.x, 5);
     });
   });
 
@@ -36,11 +36,11 @@ describe('Boundary', function() {
       var boundary1 = new Boundary(0, 20, 10, 10);
       var boundary2 = new Boundary(0, 310, 10, 10);
       boundary1.shuffleBoundary();
-        expect.isAbove(boundary1.y, -176);
-        expect.isBelow(boundary1.y, -49);
+        assert.isAbove(boundary1.y, -176);
+        assert.isBelow(boundary1.y, -49);
       boundary2.shuffleBoundary();
-        expect.isAbove(boundary2.y, 509);
-        expect.isBelow(boundary2.y, 581);
+        assert.isAbove(boundary2.y, 509);
+        assert.isBelow(boundary2.y, 581);
     });
   });
 });
