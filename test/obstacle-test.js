@@ -1,4 +1,4 @@
-const expect = require('chai').assert;
+const assert = require('chai').assert;
 const Obstacle = require('../lib/obstacle');
 
 describe('Obstacle', function() {
@@ -6,19 +6,19 @@ describe('Obstacle', function() {
     var obstacle = new Obstacle(0, 0, 10, 10);
 
     it('should assign an x coordinate', function() {
-      expect.equal(obstacle.x, 0);
+      assert.equal(obstacle.x, 0);
     });
 
     it('should assign a y coordinate', function() {
-      expect.equal(obstacle.y, 0);
+      assert.equal(obstacle.y, 0);
     });
 
     it('should assign a height', function(){
-      expect.equal(obstacle.height, 10);
+      assert.equal(obstacle.height, 10);
     });
 
     it('should assign a width', function(){
-      expect.equal(obstacle.width, 10);
+      assert.equal(obstacle.width, 10);
     });
   });
 
@@ -27,7 +27,7 @@ describe('Obstacle', function() {
       var xcoord = 10;
       var obstacle = new Obstacle(xcoord, 0, 10, 10);
       obstacle.move();
-      expect.equal(obstacle.x, 5);
+      assert.equal(obstacle.x, 5);
     });
   });
 
@@ -35,10 +35,10 @@ describe('Obstacle', function() {
     it('should assign random height between 70 and 120 and y between 80 and 450', function(){
       var obstacle = new Obstacle(0, 20, 10, 10);
       obstacle.shuffleObstacle();
-        expect.isAbove(obstacle.height, 69);
-        expect.isBelow(obstacle.height, 450);
-        expect.isAbove(obstacle.y, 79);
-        expect.isBelow(obstacle.y, 451);
+        assert.isAbove(obstacle.height, 69);
+        assert.isBelow(obstacle.height, 450);
+        assert.isAbove(obstacle.y, 79);
+        assert.isBelow(obstacle.y, 451);
     });
   });
 });
