@@ -39,12 +39,13 @@ describe('Copter', function() {
   });
 
   describe('#upLift', function() {
-    it('should move y coordinate by 21', function(){
+    it('should move y coordinate by 6', function(){
       var img = 'img';
       var ycoord = 1;
       var copter = new Copter(img, 0, ycoord, 10, 10);
       copter.upLift();
-      expect.equal(copter.y, -20);
+      copter.gravity();
+      expect.equal(copter.y, -5);
     });
   });
 
