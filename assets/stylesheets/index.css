@@ -7,13 +7,13 @@
   background-size: cover;
   min-height: 100vh;
   text-align: center;
+  color: #ffffff;
 }
 .game-canvas {
-  border: 1px dashed;
   margin: auto;
   display: block;
   text-align: center;
-  padding-top: 50px;
+  padding-top: 20px;
 }
 
 #start-game, #end-game {
@@ -22,8 +22,8 @@
 
 .score-count {
   text-align: center;
-  padding-top: 70px;
   padding-right: 20px;
+  padding-top: 25px;
   color: #ffffff;
   display: inline-block;
   position: relative
@@ -35,7 +35,6 @@
 
 .scoreboard {
   padding-left: 50px;
-  padding-top: 50px;
   float: left;
   color: #ffffff;
 }
@@ -68,3 +67,10 @@ button {
 	font-size: 45px;
 	font-weight: normal;
 }
+
+/*.info {
+  padding-top: 10px;
+}
+
+.info #game-title {
+}*/
