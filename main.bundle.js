@@ -10247,6 +10247,7 @@
 	    key: "shuffleObstacle",
 	    value: function shuffleObstacle() {
 	      this.y = Math.floor(Math.random() * (450 - 80) + 80);
+	      this.height = Math.floor(Math.random() * (100 - 20) + 20);
 	    }
 	  }]);
 
