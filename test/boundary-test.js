@@ -36,8 +36,8 @@ describe('Boundary', function() {
       var boundary1 = new Boundary(0, 20, 10, 10);
       var boundary2 = new Boundary(0, 310, 10, 10);
       boundary1.shuffleBoundary();
-        assert.isAbove(boundary1.y, -176);
-        assert.isBelow(boundary1.y, -49);
+        assert.isAbove(boundary1.y, -51);
+        assert.isBelow(boundary1.y, 1);
       boundary2.shuffleBoundary();
         assert.isAbove(boundary2.y, 509);
         assert.isBelow(boundary2.y, 581);
