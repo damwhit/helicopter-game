@@ -2,19 +2,22 @@
 <html>
 <head>
   <link rel="stylesheet" href="assets/stylesheets/index.css" media="screen" title="no title" charset="utf-8">
+  <link href='https://fonts.googleapis.com/css?family=Sarpanch:500' rel='stylesheet' type='text/css'>
   <meta charset="utf-8">
   <title>Helicopter Time</title>
 </head>
 <body>
   <div class="copter-game">
-    <button class="button" id="start-button">start game</button>
-    <button class="end-game button">Game OVER... try again?</button>
-    <img id="copter-pic" src="assets/images/copter.jpg">
-    <img id="cloud-pic" src="assets/images/cloud.jpg">
+    <div class="score-count"></div>
+    <img id="copter-pic" src="assets/images/attack-copter.png">
+    <img id="cloud-pic" src="assets/images/cloud-black.png">
+    <img id="building-pic" src="assets/images/building.jpg">
+    <img id="fireball-pic" src="assets/images/fireball.png">
+    <img id="angry-bird-pic" src="assets/images/angry-bird.png">
+    <img id="parachute-pic" src="assets/images/parachute.png">
     <audio controls="controls" preload="none" id="danger-zone" src="assets/sounds/DangerZone.mp3" controls autoplay loop>
       <p>Your browser does not support the <code>audio</code> element </p>
     </audio>
-    <div class="score-count"></div>
     <div class="scoreboard">
       <h1>Top Scores</h1>
       <table id='scoreboard-table'>
@@ -28,6 +31,12 @@
         </tbody>
       </table>
     </div>
+    <div class="info">
+      <h1 id="game-title">Helicopter Time</h1>
+      <h3 id="game-info">Use 'spacebar' to fly and avoid obstacles. Press m to mute audio. Try and catch parachutes to slow game speed. It gets fast!</h3>
+    </div>
+    <button class="button" id="start-button">start game</button>
+    <button class="end-game button">Game OVER... try again?</button>
     <canvas id="game" class="game-canvas" width="800px" height="600px"></canvas>
   </div>
   <script src="main.bundle.js"></script>

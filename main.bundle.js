@@ -53,14 +53,19 @@
 	$('.end-game').hide();
 	$('#copter-pic').hide();
 	$('#cloud-pic').hide();
+	$('#building-pic').hide();
+	$('#fireball-pic').hide();
+	$('#angry-bird-pic').hide();
+	$('#parachute-pic').hide();
 	$('#danger-zone').hide();
 	var dangerZone = document.getElementById('danger-zone');
 	var game = new Game(dangerZone);
 
 	game.stopSong();
-
+	game.sortAndDisplayScores();
 	$('.button').on('click', function () {
 	  $('#start-button').hide();
+	  $('.info').hide();
 	  $('.game-canvas').show();
 	  var nextGame = new Game(dangerZone);
 	  nextGame.start();
@@ -9928,7 +9933,8 @@
 	var Copter = __webpack_require__(3);
 	var Obstacle = __webpack_require__(4);
 	var Boundary = __webpack_require__(5);
-	var Scores = [];
+	var PowerUp = __webpack_require__(6);
+	var playback = 'true';
 	var canvas = document.getElementById('game');
 	var context = canvas.getContext('2d');
 
@@ -9938,12 +9944,18 @@
 
 	    this.status = 'active';
 	    this.song = song;
-	    this.scores = [];
 	    this.copterImg = document.getElementById("copter-pic");
 	    this.cloudImg = document.getElementById("cloud-pic");
-	    this.copter = new Copter(this.copterImg, 200, 280, 60, 40, context);
+	    this.fireballImg = document.getElementById("fireball-pic");
+	    this.buildingImg = document.getElementById("building-pic");
+	    this.angryBirdImg = document.getElementById("angry-bird-pic");
+	    this.parachuteImg = document.getElementById("parachute-pic");
+	    this.background = new Image();
+	    this.background.src = "assets/images/sunset.png";
+	    this.copter = new Copter(this.copterImg, 200, 280, 80, 30, context);
 	    this.boundaries = [];
 	    this.obstacles = [];
+	    this.powerUps = [];
 	  }
 
 	  _createClass(Game, [{
@@ -9953,39 +9965,51 @@
 	      this.song.currentTime = 0;
 	    }
 	  }, {
-	    key: 'sortScores',
-	    value: function sortScores(score) {
-	      Scores.push(score);
-	      var sortedScores = Scores.sort(function (a, b) {
-	        return b - a;
-	      });
-	      $('#score').empty();
-	      for (var i = 0; i < sortedScores.length; i++) {
-	        $('#score').append('<h5>Score: ' + (sortedScores[i] - 1) + ' </h5>');
+	    key: 'sortAndDisplayScores',
+	    value: function sortAndDisplayScores() {
+	      var scores = [];
+	      for (var i = 0; i < localStorage.length; i++) {
+	        scores.push(localStorage.getItem(localStorage.key(i)));
+	      }
+	      if (scores.length > 0) {
+	        var sortedScores = scores.sort(function (a, b) {
+	          return b - a;
+	        });
+	        $('#score').empty();
+	        for (var j = 0; j < scores.length && j < 9; j++) {
+	          $('#score').append('<h5>Score: ' + sortedScores[j] + ' </h5>');
+	        }
 	      }
 	    }
 	  }, {
 	    key: 'createTopBoundaries',
 	    value: function createTopBoundaries() {
-	      for (var i = 0; i < 4; i++) {
-	        this.boundaries.push(new Boundary(i * 225, -150, 225, 225, context, this, this.cloudImg));
+	      for (var i = 0; i < 6; i++) {
+	        this.boundaries.push(new Boundary(i * 225, -0, 300, 100, context, this, this.cloudImg));
 	      }
 	    }
 	  }, {
 	    key: 'createBottomBoundaries',
 	    value: function createBottomBoundaries() {
-	      for (var j = 0; j < 18; j++) {
-	        this.boundaries.push(new Boundary(j * 50, 580, 50, 120, context, this));
+	      for (var j = 0; j < 24; j++) {
+	        this.boundaries.push(new Boundary(j * 50, 580, 50, 120, context, this, this.buildingImg));
 	      }
 	    }
 	  }, {
 	    key: 'createObstacles',
 	    value: function createObstacles() {
-	      this.obstacles.push(new Obstacle(2800, 250, 20, 120, context, this));
+	      this.obstacles.push(new Obstacle(this.fireballImg, 2800, 250, 80, 40, context, this));
+	      this.obstacles.push(new Obstacle(this.angryBirdImg, 3250, 250, 80, 80, context, this));
+	    }
+	  }, {
+	    key: 'createPowerUps',
+	    value: function createPowerUps() {
+	      this.powerUps.push(new PowerUp(this.parachuteImg, 2500, 250, 20, 20, context, this));
 	    }
 	  }, {
 	    key: 'randomizeColliders',
 	    value: function randomizeColliders(colliders, copter, score) {
+	      var that = this;
 	      colliders.forEach(function (collider) {
 	        collider.draw().move();
 	        if (score !== 0 && score % 500 === 0) {
@@ -9995,44 +10019,94 @@
 	          collider.x = 800;
 	          shuffleColliders(collider);
 	        }
-	        copter.checkForCollision(collider);
+	        if (copter.status === "powered up") {
+	          collider.decreaseSpeed();
+	          copter.status = "flying";
+	        }
+	        that.checkForCollision(collider);
 	      });
+	    }
+	  }, {
+	    key: 'playSong',
+	    value: function playSong() {
+	      if (this.song.currentTime < 12) {
+	        this.song.currentTime = 12;
+	      }
+	      this.song.play();
+	    }
+	  }, {
+	    key: 'checkForCollision',
+	    value: function checkForCollision(collider) {
+	      if (this.copter.x < collider.x + collider.width && this.copter.x + this.copter.width > collider.x && this.copter.y < collider.y + collider.height && this.copter.height + this.copter.y > collider.y) {
+	        if (!isPowerUp(collider)) {
+	          this.copter.status = "crashed";
+	          collider.game.status = 'inactive';
+	        } else {
+	          this.copter.status = "powered up";
+	          collider.clearPowerUp();
+	        }
+	      }
 	    }
 	  }, {
 	    key: 'start',
 	    value: function start() {
 	      $('.end-game').hide();
-
 	      this.copter.draw();
 	      this.createTopBoundaries();
 	      this.createBottomBoundaries();
 	      this.createObstacles();
-
+	      this.createPowerUps();
 	      var that = this;
 	      var score = 0;
 
 	      window.requestAnimationFrame(function gameLoop() {
 	        if (that.status === 'active') {
 	          that.song.play();
-	          context.clearRect(0, 0, canvas.width, canvas.height);
+	          if (playback === 'true') {
+	            that.playSong();
+	          }
+
+	          if (playback === 'muted') {
+	            that.stopSong();
+	          }
+
+	          context.drawImage(that.background, 0, 0, canvas.width, canvas.height);
 	          that.copter.draw().gravity();
+
 	          that.randomizeColliders(that.boundaries, that.copter, score);
 	          that.randomizeColliders(that.obstacles, that.copter, score);
+	          that.randomizeColliders(that.powerUps, that.copter, score);
 
 	          if (that.copter.status === 'crashed') {
 	            that.copter.crash();
 	            that.stopSong();
-	            that.sortScores(score);
+	            localStorage.setItem('score#' + score, score);
+	            that.sortAndDisplayScores(score);
 	          }
+
 	          requestAnimationFrame(gameLoop);
 	          $('.score-count').html(score++);
 	        }
 	      });
 
-	      window.addEventListener('keypress', function (event) {
+	      window.addEventListener('keydown', function (event) {
 	        event.preventDefault();
 	        if (event.keyCode === 32) {
 	          that.copter.upLift();
+	        }
+	      });
+
+	      window.addEventListener('keyup', function (event) {
+	        event.preventDefault();
+	        if (event.keyCode === 32) {
+	          that.copter.downpull = 3;
+	        }
+	      });
+
+	      window.addEventListener('keyup', function (event) {
+	        event.preventDefault();
+	        if (event.keyCode === 77) {
+	          playback = 'muted';
 	        }
 	      });
 	    }
@@ -10044,8 +10118,10 @@
 	function shuffleColliders(collider) {
 	  if (isBoundary(collider)) {
 	    collider.shuffleBoundary();
-	  } else {
+	  } else if (isObstacle(collider)) {
 	    collider.shuffleObstacle();
+	  } else {
+	    collider.shufflePowerUp();
 	  }
 	}
 
@@ -10053,8 +10129,16 @@
 	  return collider instanceof Boundary;
 	}
 
+	function isObstacle(collider) {
+	  return collider instanceof Obstacle;
+	}
+
+	function isPowerUp(collider) {
+	  return collider instanceof PowerUp;
+	}
+
 	function obstacleLeftPage(collider) {
-	  return collider.x < -99;
+	  return collider.x < -299;
 	}
 
 	module.exports = Game;
@@ -10082,6 +10166,7 @@
 	    this.context = context || {};
 	    this.image = image;
 	    this.status = "flying" || {};
+	    this.downpull = 4;
 	  }
 
 	  _createClass(Copter, [{
@@ -10093,26 +10178,18 @@
 	  }, {
 	    key: 'gravity',
 	    value: function gravity() {
-	      this.y += 4;
+	      this.y += this.downpull;
 	    }
 	  }, {
 	    key: 'upLift',
 	    value: function upLift() {
-	      this.y = this.y - 21;
+	      this.downpull = -6;
 	    }
 	  }, {
 	    key: 'crash',
 	    value: function crash() {
 	      $('.game-canvas').hide();
 	      $('.end-game').show();
-	    }
-	  }, {
-	    key: 'checkForCollision',
-	    value: function checkForCollision(collider) {
-	      if (this.x < collider.x + collider.width && this.x + this.width > collider.x && this.y < collider.y + collider.height && this.height + this.y > collider.y) {
-	        this.status = "crashed";
-	        collider.game.status = 'inactive';
-	      }
 	    }
 	  }]);
 
@@ -10132,9 +10209,10 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Obstacle = (function () {
-	  function Obstacle(x, y, width, height, context, game) {
+	  function Obstacle(image, x, y, width, height, context, game) {
 	    _classCallCheck(this, Obstacle);
 
+	    this.image = image;
 	    this.x = x;
 	    this.y = y;
 	    this.width = width;
@@ -10147,7 +10225,7 @@
 	  _createClass(Obstacle, [{
 	    key: "draw",
 	    value: function draw() {
-	      this.context.fillRect(this.x, this.y, this.width, this.height);
+	      this.context.drawImage(this.image, this.x, this.y, this.width, this.height);
 	      return this;
 	    }
 	  }, {
@@ -10161,10 +10239,14 @@
 	      this.speed = this.speed += 2;
 	    }
 	  }, {
+	    key: "decreaseSpeed",
+	    value: function decreaseSpeed() {
+	      this.speed = this.speed -= 2;
+	    }
+	  }, {
 	    key: "shuffleObstacle",
 	    value: function shuffleObstacle() {
 	      this.y = Math.floor(Math.random() * (450 - 80) + 80);
-	      this.height = Math.floor(Math.random() * (120 - 70) + 70);
 	    }
 	  }]);
 
@@ -10199,11 +10281,7 @@
 	  _createClass(Boundary, [{
 	    key: "draw",
 	    value: function draw() {
-	      if (this.y < 300) {
-	        this.context.drawImage(this.image, this.x, this.y, this.width, this.height);
-	      } else {
-	        this.context.fillRect(this.x, this.y, this.width, this.height);
-	      }
+	      this.context.drawImage(this.image, this.x, this.y, this.width, this.height);
 	      return this;
 	    }
 	  }, {
@@ -10217,10 +10295,15 @@
 	      this.x = this.x -= 2;
 	    }
 	  }, {
+	    key: "decreaseSpeed",
+	    value: function decreaseSpeed() {
+	      this.speed = this.speed -= 2;
+	    }
+	  }, {
 	    key: "shuffleBoundary",
 	    value: function shuffleBoundary() {
 	      if (this.y < 300) {
-	        this.y = Math.floor(Math.random() * (-100 - -175) + -175);
+	        this.y = Math.floor(Math.random() * (0 - -50) + -50);
 	      } else {
 	        this.y = Math.floor(Math.random() * (580 - 510) + 510);
 	      }
@@ -10231,6 +10314,69 @@
 	})();
 
 	module.exports = Boundary;
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var PowerUp = (function () {
+	  function PowerUp(image, x, y, width, height, context, game) {
+	    _classCallCheck(this, PowerUp);
+
+	    this.image = image;
+	    this.x = x;
+	    this.y = y;
+	    this.width = width;
+	    this.height = height;
+	    this.context = context || {};
+	    this.game = game || {};
+	    this.speed = 5;
+	  }
+
+	  _createClass(PowerUp, [{
+	    key: "draw",
+	    value: function draw() {
+	      this.context.drawImage(this.image, this.x, this.y, this.width, this.height);
+	      return this;
+	    }
+	  }, {
+	    key: "move",
+	    value: function move() {
+	      this.x -= this.speed;
+	    }
+	  }, {
+	    key: "increaseSpeed",
+	    value: function increaseSpeed() {
+	      this.speed = this.speed += 2;
+	    }
+	  }, {
+	    key: "decreaseSpeed",
+	    value: function decreaseSpeed() {
+	      this.speed = this.speed -= 2;
+	    }
+	  }, {
+	    key: "clearPowerUp",
+	    value: function clearPowerUp() {
+	      this.x = 1100;
+	      this.shufflePowerUp();
+	    }
+	  }, {
+	    key: "shufflePowerUp",
+	    value: function shufflePowerUp() {
+	      this.y = Math.floor(Math.random() * (450 - 80) + 80);
+	    }
+	  }]);
+
+	  return PowerUp;
+	})();
+
+	module.exports = PowerUp;
 
 /***/ }
 /******/ ]);
