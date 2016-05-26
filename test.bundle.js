@@ -88,8 +88,8 @@
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
-		module.hot.accept("!!/Users/brianrippeto/Turing/4module/projects/helicopter-time/node_modules/mocha-loader/node_modules/css-loader/index.js!/Users/brianrippeto/Turing/4module/projects/helicopter-time/node_modules/mocha/mocha.css", function() {
-			var newContent = require("!!/Users/brianrippeto/Turing/4module/projects/helicopter-time/node_modules/mocha-loader/node_modules/css-loader/index.js!/Users/brianrippeto/Turing/4module/projects/helicopter-time/node_modules/mocha/mocha.css");
+		module.hot.accept("!!/Users/davidwhitaker/turing/4module/projects/helicopter-time/node_modules/mocha-loader/node_modules/css-loader/index.js!/Users/davidwhitaker/turing/4module/projects/helicopter-time/node_modules/mocha/mocha.css", function() {
+			var newContent = require("!!/Users/davidwhitaker/turing/4module/projects/helicopter-time/node_modules/mocha-loader/node_modules/css-loader/index.js!/Users/davidwhitaker/turing/4module/projects/helicopter-time/node_modules/mocha/mocha.css");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
