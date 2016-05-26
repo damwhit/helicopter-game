@@ -1,8 +1,19 @@
+* {
+  font-family: 'Sarpanch', sans-serif;
+}
+
+.copter-game {
+  background: black;
+  background-size: cover;
+  min-height: 100vh;
+  text-align: center;
+  color: #ffffff;
+}
 .game-canvas {
-  border: 1px dashed;
   margin: auto;
   display: block;
   text-align: center;
+  padding-top: 20px;
 }
 
 #start-game, #end-game {
@@ -11,6 +22,10 @@
 
 .score-count {
   text-align: center;
+  padding-right: 20px;
+  padding-top: 25px;
+  color: #ffffff;
+  display: inline-block;
   position: relative
     margin: 40px 0;
     font-size: 40px;
@@ -19,19 +34,21 @@
   }
 
 .scoreboard {
-  padding-left: 70px;
+  padding-left: 50px;
   float: left;
+  color: #ffffff;
 }
 
 #scoreboard-table {
   font-size: 24px;
 }
 
-.copter-game{
-  padding-top: 50px;
-}
 
 button {
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  margin-top: 100px;
 	background-color: firebrick;
 	color: white;
 	box-shadow: 1px 0px 1px #DC143C,
@@ -49,5 +66,11 @@ button {
 	border: 0px;
 	font-size: 45px;
 	font-weight: normal;
-	font-family: 'Josefin Slab', cursive;
 }
+
+/*.info {
+  padding-top: 10px;
+}
+
+.info #game-title {
+}*/
