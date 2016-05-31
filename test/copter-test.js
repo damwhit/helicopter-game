@@ -48,4 +48,17 @@ describe('Copter', function() {
       assert.equal(copter.y, -5);
     });
   });
+
+  describe('#checkForCollision', function() {
+    it('should change copter status to crashed on impact', function(){
+      var img = 'img';
+      var ycoord = 495;
+      var copter = new Copter(img, 0, ycoord, 10, 10);
+      var boundary = new Boundary(0, 500, 200, 10);
+      assert.equal(copter.status, "flying");
+      copter.gravity();
+      copter.checkForCollision(boundary);
+      assert.equal(copter.status, "crashed");
+    });
+  });
 });
