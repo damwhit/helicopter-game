@@ -1,6 +1,5 @@
 const assert = require('chai').assert;
 const Copter = require('../lib/copter');
-const Boundary = require('../lib/boundary');
 
 describe('Copter', function() {
   context('with default attributes', function() {
